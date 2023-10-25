@@ -19,11 +19,13 @@ const SLIDE_DATA = [
 ];
 
 export default class WelcomeScreen extends Component {
+  onSlideComplete = () => {
+    this.props.navigation.navigate("Auth");
+  };
   render() {
     return (
       <SafeAreaView>
-        <Slides data={SLIDE_DATA} />
-        {/* <Text>hello</Text> */}
+        <Slides data={SLIDE_DATA} onComplete={this.onSlideComplete} />
       </SafeAreaView>
     );
   }
