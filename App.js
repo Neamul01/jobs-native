@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { StyleSheet, Text, View } from "react-native";
 import AuthScreen from "./screens/AuthScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
@@ -9,49 +9,53 @@ import DeckScreen from "./screens/DeckScreen";
 import ReviewScreen from "./screens/ReviewScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import { createStackNavigator } from "@react-navigation/stack";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Button } from "@rneui/base";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Welcome"
-          component={WelcomeScreen}
-          options={{
-            headerShown: false,
-            // tabBarButton: () => null,
-            // tabBarStyle: {
-            //   display: "none",
-            // },
-          }}
-        />
-        <Tab.Screen
-          name="Auth"
-          component={AuthScreen}
-          options={{
-            headerShown: false,
-            // tabBarButton: () => null,
-            // tabBarStyle: {
-            //   display: "none",
-            // },
-          }}
-        />
-        <Tab.Screen
-          name="Main"
-          component={MainNavigator}
-          options={{
-            headerShown: false,
-            // tabBarButton: () => null,
-            // tabBarStyle: {
-            //   display: "none",
-            // },
-          }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen
+            name="Welcome"
+            component={WelcomeScreen}
+            options={{
+              headerShown: false,
+              // tabBarButton: () => null,
+              // tabBarStyle: {
+              //   display: "none",
+              // },
+            }}
+          />
+          <Tab.Screen
+            name="Auth"
+            component={AuthScreen}
+            options={{
+              headerShown: false,
+              // tabBarButton: () => null,
+              // tabBarStyle: {
+              //   display: "none",
+              // },
+            }}
+          />
+          <Tab.Screen
+            name="Main"
+            component={MainNavigator}
+            options={{
+              headerShown: false,
+              // tabBarButton: () => null,
+              // tabBarStyle: {
+              //   display: "none",
+              // },
+            }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 
@@ -84,13 +88,20 @@ function MainNavigator() {
 }
 
 function SettingsNavigator() {
+  const navigation = useNavigation();
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="Review"
         component={ReviewScreen}
         options={{
-          headerRight: (props) => <Text {...props}>+</Text>,
+          headerRight: (props) => (
+            <Button
+              onPress={() => navigation.navigate("Settings")}
+              title={"title"}
+              {...props}
+            />
+          ),
         }}
       />
       <Stack.Screen name="Settings" component={SettingsScreen} />
