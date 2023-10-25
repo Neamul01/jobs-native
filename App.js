@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import AuthScreen from "./screens/AuthScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import MapScreen from "./screens/MapScreen";
@@ -97,8 +97,9 @@ function SettingsNavigator() {
         options={{
           headerRight: (props) => (
             <Button
+              type="clear"
               onPress={() => navigation.navigate("Settings")}
-              title={"title"}
+              title={"Settings"}
               {...props}
             />
           ),
@@ -115,5 +116,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  settingsBar: {
+    marginRight: 10,
+    borderWidth: 2,
+    borderColor: "black",
   },
 });
