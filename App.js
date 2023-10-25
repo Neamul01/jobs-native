@@ -1,20 +1,108 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import { StyleSheet, Text, View } from "react-native";
+import AuthScreen from "./screens/AuthScreen";
+import WelcomeScreen from "./screens/WelcomeScreen";
+import MapScreen from "./screens/MapScreen";
+import DeckScreen from "./screens/DeckScreen";
+import ReviewScreen from "./screens/ReviewScreen";
+import SettingsScreen from "./screens/SettingsScreen";
+import { createStackNavigator } from "@react-navigation/stack";
+
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Welcome"
+          component={WelcomeScreen}
+          options={{
+            headerShown: false,
+            // tabBarButton: () => null,
+            // tabBarStyle: {
+            //   display: "none",
+            // },
+          }}
+        />
+        <Tab.Screen
+          name="Auth"
+          component={AuthScreen}
+          options={{
+            headerShown: false,
+            // tabBarButton: () => null,
+            // tabBarStyle: {
+            //   display: "none",
+            // },
+          }}
+        />
+        <Tab.Screen
+          name="Main"
+          component={MainNavigator}
+          options={{
+            headerShown: false,
+            // tabBarButton: () => null,
+            // tabBarStyle: {
+            //   display: "none",
+            // },
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+
+function MainNavigator() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Map"
+        component={MapScreen}
+        options={{
+          title: "Maps",
+        }}
+      />
+      <Tab.Screen
+        name="Deck"
+        component={DeckScreen}
+        options={{
+          title: "Deck",
+        }}
+      />
+      <Tab.Screen
+        name="Setting"
+        component={SettingsNavigator}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
+
+function SettingsNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Review"
+        component={ReviewScreen}
+        options={{
+          headerRight: (props) => <Text {...props}>+</Text>,
+        }}
+      />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
+    </Stack.Navigator>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
