@@ -1,4 +1,6 @@
 <resources>
+  <string name="facebook_app_id">321370610537862</string>
+  <string name="facebook_client_token">23d727373ab676319c145a3f6e96caad</string>
   <string name="app_name">jobs</string>
   <string name="expo_splash_screen_resize_mode" translatable="false">contain</string>
   <string name="expo_splash_screen_status_bar_translucent" translatable="false">false</string>

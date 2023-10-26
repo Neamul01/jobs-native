@@ -18,6 +18,7 @@ const AuthScreen = () => {
         );
         const userInfo = await userInfoResponse.json();
         setUser(userInfo);
+        console.log(userInfo);
       };
 
       fetchUserInfo(); // Call the fetchUserInfo function
@@ -66,3 +67,5 @@ function Profile({ user }) {
 export default AuthScreen;
 
 const styles = StyleSheet.create({});
+
+// https://com.anonymous.jobs/expo-development-client/?url=http%3A%2F%2F192.168.195.147%3A8081
